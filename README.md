@@ -2,6 +2,8 @@
 This is a (very) lightweight framework for a Chatbot based on Alexan Innovation's Chatbot Platform.
 Use this as a starter for rapid LUIS integration and prototyping.
 
+See it deployed here: https://luischatbotlite.azurewebsites.net
+
 # Setup
 Ensure you have node.js installed
 
