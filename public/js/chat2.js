@@ -43,7 +43,7 @@ function sendFeedback(action, intent, rootControlID) {
 
 
     params = { "action": feedbackAction, intent: intent, convoID: convID, datetime: theDate, lang: lang };
-    socket.emit('feedback', params, function (err) {
+    socket.emit('feedback', params, function(err) {
 
     });
 
@@ -53,10 +53,10 @@ function sendFeedback(action, intent, rootControlID) {
 var socket = io(); // making req from client to server to open up a websocket and keep it open.
 
 
-socket.on('connect', function () {
+socket.on('connect', function() {
     var theDate = Date.now();
     var params = { queryString: jQuery.deparam(window.location.search), eventDateTime: theDate };
-    socket.emit('join', params, function (err) {
+    socket.emit('join', params, function(err) {
 
         if (err) {
             console.log(err);
@@ -67,19 +67,19 @@ socket.on('connect', function () {
 
 });
 
-socket.on('socketID', function (message) {
+socket.on('socketID', function(message) {
     document.getElementById('convoid').val = message;
 });
 
 
 // New Message FROM server
 
-socket.on('newMessage', function (message) {
+socket.on('newMessage', function(message) {
     var textToShow = message.text
     var textToShowArray = textToShow.split("|");
     var feedbackRootID = message.createdAt;
 
-    var botNameHTML = '<b>DSIA</b><br>';
+    var botNameHTML = '<b>LUIS BotLite</b><br>';
 
     for (var i = 0; i < textToShowArray.length; i++) {
         var specificRootID = feedbackRootID + i;
@@ -95,11 +95,9 @@ socket.on('newMessage', function (message) {
         }
     }
 
-    chatWindow.talk(
-        {
+    chatWindow.talk({
             "response": {
-                says:
-                    textToShowArray,
+                says: textToShowArray,
                 reply: message.replies
             }
         },
@@ -108,7 +106,7 @@ socket.on('newMessage', function (message) {
 
 });
 
-socket.on('disconnect', function () {
+socket.on('disconnect', function() {
     // do nothing (server cleans up)
 });
 
@@ -116,8 +114,3 @@ socket.on('disconnect', function () {
 
 var theDate = Date.now();
 var params = { queryString: jQuery.deparam(window.location.search), eventDateTime: theDate };
-
-
-
-
-
