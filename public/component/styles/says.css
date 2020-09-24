@@ -1,0 +1,59 @@
+/* style bubbles */
+.bubble,
+.bubble-typing {
+  color:white;
+  background: rgb(56, 17, 119);
+  padding: 8px 16px;
+  border-radius: 5px 15px 15px 15px;
+  font-weight: 425;
+  text-transform: none;
+  text-align: left;
+  font-size: 16px;
+  letter-spacing: .7px;
+  /*Margins expanded thanks to IE scrolling bug...*/
+  margin: 32px 0px 32px 0;
+  max-width: 70%;
+  float: none;
+  clear: both;
+  line-height: 1.5em;
+  word-break: break-word;
+  transform-origin: left top;
+  transition: all 200ms;
+  box-sizing: content-box;
+}
+.bubble .bubble-content {
+  transition: opacity 150ms;
+}
+.bubble:not(.say) .bubble-content {
+  opacity: 0;
+}
+.bubble-typing.imagine,
+.bubble.imagine {
+  transform: scale(0);
+  transition: all 200ms, height 200ms 1s, padding 200ms 1s;
+}
+.bubble.imagine {
+  margin: 0;
+  height: 0;
+  padding: 0;
+}
+
+/* style media that's inside bubbles */
+.bubble .bubble-content img {
+  width: calc(100% + 32px);
+  margin: -8px -16px;
+  overflow: hidden;
+  display: block;
+  border-radius: 5px 15px 15px 15px;
+}
+
+/* interaction recall styles */
+.bubble.history,
+.bubble.history .bubble-content,
+.bubble.history .bubble-content .bubble-button,
+.bubble.history .bubble-content .bubble-button:hover {
+  transition: all 0ms !important;
+}
+.bubble.history {
+  opacity: .25;
+}

@@ -1,0 +1,4 @@
+node_modules/
+package-lock.json
+pvt-keys/
+server/config/config.json

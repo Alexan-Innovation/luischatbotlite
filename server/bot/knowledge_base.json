@@ -1,0 +1,22 @@
+{
+
+    "answers": [{
+            "intent": "general_hello",
+            "answer": "Hello world."
+        },
+        {
+            "intent": "howtogettested",
+            "answer": "Please contact your doctor."
+        },
+        {
+            "intent": "whataresymptoms",
+            "answer": "Not feeling well is a symptom. Talk to your doctor."
+        },
+        {
+            "intent": "None",
+            "modelq": "Exclude",
+            "shortq": "Exclude",
+            "answer": "Sorry, I do not understand. Please try and re-phrase your question."
+        }
+    ]
+}

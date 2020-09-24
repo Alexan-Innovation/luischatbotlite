@@ -1,0 +1,121 @@
+<!--
+  //  Author: Ben Rogers: ben@alexaninnovation.com
+  //  http://www.alexaninnovation.com
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>LUIS BOTLite</title>
+
+    <!-- for mobile screens -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- stylesheets are conveniently separated into components -->
+    <link rel="stylesheet" media="all" href="component/styles/setup.css">
+    <link rel="stylesheet" media="all" href="component/styles/says.css">
+    <link rel="stylesheet" media="all" href="component/styles/reply.css">
+    <link rel="stylesheet" media="all" href="component/styles/typing.css">
+    <link rel="stylesheet" media="all" href="component/styles/input.css">
+    <style>
+        body {
+            background: white;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .bubble-container {
+            height: 99vh;
+            background: #FFFFFF;
+            -moz-box-shadow: 0 0 3px 3px #888;
+            -webkit-box-shadow: 0 0 3px 3px#888;
+            box-shadow: 0 0 3px 3px #888;
+        }
+        
+        .bubble-container .input-wrap textarea {
+            margin: 0;
+            width: calc(100% - 35px);
+        }
+        /* unvisited link */
+        
+        a:link {
+            color: rgb(21, 53, 84);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        /* visited link */
+        
+        a:visited {
+            color: rgb(21, 53, 84);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        /* mouse over link */
+        
+        a:hover {
+            color: rgb(121, 169, 219);
+            text-decoration: none;
+        }
+        /* selected link */
+        
+        a:active {
+            color: rgb(121, 169, 219);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <div id="chat">
+
+        </div>
+    </main>
+    <!-- import the JavaScript file -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="js/Bubbles.js"></script>
+    <script src="js/libs/jquery-3.3.1.min.js"></script>
+    <script src="js/libs/moment.js"></script>
+
+    <script src="js/libs/deparam.js"></script>
+    <script src="js/chat2.js"></script>
+
+    <input type="hidden" id="convoid" />
+
+    <script>
+        var botNameHTML = '<b>LUIS BotLite</b><br>'
+        var theDate = Date.now();
+        // initialize by constructing a named function...
+        // ...and add text processing plugin:
+        var chatWindow = new Bubbles(document.getElementById("chat"), "chatWindow", {
+            inputCallbackFn: function(o) {
+                var messageData = {
+                    text: o.input,
+                    eventDate: theDate
+                };
+                event.preventDefault();
+                socket.emit('userSendMessage', messageData,
+                    function() {});
+
+                var txtBox = document.getElementById('chatText');
+                txtBox.innerText = "";
+                txtBox.focus();
+            }
+        })
+
+        var englishIntro = {
+            ice: {
+                says: [botNameHTML + "Hello, I\'m LUIS BotLite!", botNameHTML + "I am a <i>very</i> basic framework that you can use as a starter for rapid LUIS integration and prototyping.", botNameHTML + "Developers, go to /server/bot/intent_luis.js and change the URL to your published LUIS URL. Then, check out /server/bot/knowledge_base.json to match intent names with answers!"],
+                reply: []
+            }
+        }
+        var convo = englishIntro;
+        chatWindow.talk(convo);
+    </script>
+</body>
